@@ -1,0 +1,8 @@
+{
+    "name" : "suzuka-bot",
+    "version": "0.0.1",
+    "description": "A discord bot made for fun",
+    "main": "main.js",
+    "author": "Scripteval",
+    "dependencies": {}
+}

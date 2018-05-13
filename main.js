@@ -2,10 +2,8 @@ let Discord = require("discord.io");
 let logger  = require("winston");
 let auth    = require("./auth.json");
 let helpers = require("./src/helpers.js")
-let request = require("request");
 
 const DCHARLIMIT = 2000;
-
 
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -94,26 +92,12 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                 
             //my friends wanted this one
             case "bepsi": {
-                const url = "http://fictionalcompanies.wikia.com/api/v1/" + 
-                "Articles/List?expand=1&limit=200";
-                request.get({
-                    url: url,
-                    json: true,
-                    headers: {"User-Agent": "request"}
-                }, (err, res, data) => {
-                    if (err) {
-                        result = 'Error: ' + err;
-                    } else if (res.statusCode !== 200) {
-                        result = "Status: " + res.statusCode.toString();
-                    } else {
-                        data = data.items;
-                        result = data[Math.floor(Math.random() * data.length)]
-                        .title;
-                        discord_bot.sendMessage({
-                            to: channelID,
-                            message: result
-                        });
-                    }
+                const result = helpers.bepsi();
+                result.then(result => {
+                    discord_bot.sendMessage({
+                        to: channelID,
+                        message: result
+                    });
                 });
                 break;
             }
@@ -123,6 +107,7 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                     to: channelID,
                     file: "./resources/kagerouSmirk.png"
                 });
+                break;
             }
         }
     }

@@ -1,5 +1,4 @@
-let bepsi   = require("../resources/bepsi.json");
-let request = require("request");
+let axios = require("axios");
 
 module.exports = {
     roll: function(rolls, sides) {
@@ -26,25 +25,17 @@ module.exports = {
         return result; 
     },
 
-    bepsi: function() {
-        let url = "http://fictionalcompanies.wikia.com/api/v1/Articles/" + 
-        "List?expand=1&limit=200";
-        var result = "";
-        request.get({
-            url: url,
-            json: true,
-            headers: {"User-Agent": "request"}
-        }, (err, res, data) => {
-            if (err) {
-                result = 'Error: ' + err;
-            } else if (res.statusCode !== 200) {
-                result = "Status: " + res.statusCode.toString();
-            } else {
-                data = data.items;
-                result = data[Math.floor(Math.random() * data.length)].title;
-            }
-        });
-        console.log(result);
+    bepsi: async function() {
+        const url = "http://fictionalcompanies.wikia.com/api/v1/" +
+        "Articles/Top?limit=200";
+        let result = ""
+        try {
+            const response = await axios.get(url);
+            const data = response.data.items;
+            result = data[Math.floor(Math.random() * data.length)].title;
+        } catch (error) {
+            result = erorr;
+        }
         return result;
     }
 };

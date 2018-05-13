@@ -90,6 +90,11 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
+
+            case "8ball": {
+                result = helpers.eightball();
+                message.channel.send(result);
+            }
         }
     }
 });

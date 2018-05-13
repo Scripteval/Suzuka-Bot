@@ -1,5 +1,5 @@
 let axios = require("axios");
-
+const eballresponses = require("../resources/8ball.json");
 module.exports = {
     roll: function(rolls, sides) {
         let result = `Rolling **${rolls}d${sides}**:`;
@@ -37,5 +37,10 @@ module.exports = {
             result = error;
         }
         return result;
+    },
+
+    eightball: function() {
+        const dict = eballresponses.dict;
+        return dict[Math.floor(Math.random() * dict.length)];
     }
 };

@@ -46,7 +46,7 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                 if (!args.length || !regex.test(args[0].toLowerCase())) {
                     discord_bot.sendMessage({
                         to: channelID,
-                        message: "Usage: !roll xdy where " +
+                        message: "Usage: ``!roll xdy`` where " +
                         "x is the number of rolls and y is the number of " +
                         "sides." 
                     });

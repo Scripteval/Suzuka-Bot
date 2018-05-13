@@ -2,6 +2,7 @@ let Discord = require("discord.io");
 let logger  = require("winston");
 let auth    = require("./auth.json");
 let helpers = require("./src/helpers.js")
+let request = require("request");
 
 const DCHARLIMIT = 2000;
 
@@ -93,10 +94,26 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                 
             //my friends wanted this one
             case "bepsi": {
-                let result = helpers.bepsi();
-                discord_bot.sendMessage({
-                    to: channelID,
-                    message: result
+                const url = "http://fictionalcompanies.wikia.com/api/v1/" + 
+                "Articles/List?expand=1&limit=200";
+                request.get({
+                    url: url,
+                    json: true,
+                    headers: {"User-Agent": "request"}
+                }, (err, res, data) => {
+                    if (err) {
+                        result = 'Error: ' + err;
+                    } else if (res.statusCode !== 200) {
+                        result = "Status: " + res.statusCode.toString();
+                    } else {
+                        data = data.items;
+                        result = data[Math.floor(Math.random() * data.length)]
+                        .title;
+                        discord_bot.sendMessage({
+                            to: channelID,
+                            message: result
+                        });
+                    }
                 });
                 break;
             }

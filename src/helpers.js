@@ -1,4 +1,5 @@
-let bepsi = require("../resources/bepsi.json");
+let bepsi   = require("../resources/bepsi.json");
+let request = require("request");
 
 module.exports = {
     roll: function(rolls, sides) {
@@ -26,7 +27,24 @@ module.exports = {
     },
 
     bepsi: function() {
-        let dict = bepsi.dict;
-        return dict[Math.floor(Math.random() * dict.length)];
+        let url = "http://fictionalcompanies.wikia.com/api/v1/Articles/" + 
+        "List?expand=1&limit=200";
+        var result = "";
+        request.get({
+            url: url,
+            json: true,
+            headers: {"User-Agent": "request"}
+        }, (err, res, data) => {
+            if (err) {
+                result = 'Error: ' + err;
+            } else if (res.statusCode !== 200) {
+                result = "Status: " + res.statusCode.toString();
+            } else {
+                data = data.items;
+                result = data[Math.floor(Math.random() * data.length)].title;
+            }
+        });
+        console.log(result);
+        return result;
     }
 };

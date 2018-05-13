@@ -34,7 +34,7 @@ module.exports = {
             const data = response.data.items;
             result = data[Math.floor(Math.random() * data.length)].title;
         } catch (error) {
-            result = erorr;
+            result = error;
         }
         return result;
     }

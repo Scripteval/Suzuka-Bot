@@ -1,4 +1,4 @@
-let Discord = require("discord.io");
+let Discord = require("discord.js");
 let logger  = require("winston");
 let auth    = require("./auth.json");
 let helpers = require("./src/helpers.js")
@@ -11,30 +11,25 @@ logger.add(logger.transports.Console, {
 });
 logger.level = "debug";
 
-let discord_bot = new Discord.Client({
-    token: auth.token,
-    autorun: true
-});
+let discord_bot = new Discord.Client();
 
-discord_bot.on("ready", function(event) {
+discord_bot.on("ready", () => {
     logger.info("Connection Established");
     logger.info("Running as: ");
-    logger.info(discord_bot.username + ' Client ID: ' + discord_bot.id);
+    logger.info(discord_bot.user.tag);
 });
 
-discord_bot.on("message", function(user, userID, channelID, message, event) {
+discord_bot.on("message", message =>  {
     //Look for commands starting with '!'
-    if (message[0] == '!') {
-        let args = message.substring(1).split(' ');
+    let content = message.content;
+    if (content[0] == '!') {
+        let args = content.substring(1).split(' ');
         let cmd = args[0].toLowerCase();
         args = args.splice(1);
         
         switch(cmd) {
             case "test": {
-                discord_bot.sendMessage({
-                    to: channelID,
-                    message: "test"
-                });
+                message.channel.send("test");
                 break;
             }
 
@@ -43,12 +38,10 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                 let regex = RegExp("\\d+d\\d+");
 
                 if (!args.length || !regex.test(args[0].toLowerCase())) {
-                    discord_bot.sendMessage({
-                        to: channelID,
-                        message: "Usage: ``!roll xdy`` where " +
+                    message.channel.send("Usage: ``!roll xdy`` where " +
                         "x is the number of rolls and y is the number of " +
-                        "sides." 
-                    });
+                        "sides."
+                    );
                     break;
                 }
 
@@ -66,27 +59,19 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                     result[result.length - 1];
                 }
                 
-                discord_bot.sendMessage({
-                   to: channelID,
-                   message: result 
-                });
+                message.channel.send(result);
                 break; 
             }
 
             case "hi": {
-                discord_bot.uploadFile({
-                    to: channelID,
-                    file: "./resources/kaedeHey.png",
-                    message: "Hey!"
+                message.channel.send("Hey!", {
+                    files: ["./resources/kaedeHey.png"]
                 });
                 break;
             }
             
             case "shrug": {
-                discord_bot.sendMessage({
-                    to: channelID,
-                    message: "¯\\_(ツ)_/¯"
-                });
+                message.channel.send( "¯\\_(ツ)_/¯");
                 break;
             }
                 
@@ -94,21 +79,19 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
             case "bepsi": {
                 const result = helpers.bepsi();
                 result.then(result => {
-                    discord_bot.sendMessage({
-                        to: channelID,
-                        message: result
-                    });
+                    message.channel.send(result);
                 });
                 break;
             }
 
             case "tamamo": {
-                discord_bot.uploadFile({
-                    to: channelID,
-                    file: "./resources/kagerouSmirk.png"
+                message.channel.send({
+                    files: ["./resources/kagerouSmirk.png"]
                 });
                 break;
             }
         }
     }
 });
+
+discord_bot.login(auth.token);

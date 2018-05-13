@@ -27,7 +27,7 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
     //Look for commands starting with '!'
     if (message[0] == '!') {
         let args = message.substring(1).split(' ');
-        let cmd = args[0];
+        let cmd = args[0].toLowerCase();
         args = args.splice(1);
         
         switch(cmd) {
@@ -42,9 +42,8 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
             //more commands
             case "roll": {
                 let regex = RegExp("\\d+d\\d+");
-                let roll = args[0].toLowerCase();
 
-                if (!regex.test(roll)) {
+                if (!args.length || !regex.test(args[0].toLowerCase())) {
                     discord_bot.sendMessage({
                         to: channelID,
                         message: "Incorrect syntax! Correct usage: xdy where" +
@@ -53,9 +52,12 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                     break;
                 }
 
+                let roll = args[0].toLowerCase();
+                
                 let dpos = roll.search('d') + 1;
                 let rolls = parseInt(roll.substring(roll, dpos));
                 let sides = parseInt(args[0].substring(dpos, roll.length));
+
                 let result = helpers.roll(rolls, sides);
 
                 if (result.length > DCHARLIMIT) {
@@ -96,6 +98,10 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                     message: result
                 });
                 break;
+            }
+
+            case "tamamo": {
+                
             }
         }
     }

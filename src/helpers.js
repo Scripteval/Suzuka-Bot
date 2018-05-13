@@ -18,7 +18,6 @@ module.exports = {
             let index = result.match(": \\d").index + 2;
             result = [result.slice(0, index), "**", result.slice(index), "**"]
             .join('');
-            console.log(result);
         } else {
             result = result + ": **" + total.toString() + "**";
         }

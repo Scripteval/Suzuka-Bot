@@ -28,14 +28,15 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
         args = args.splice(1);
         
         switch(cmd) {
-            case 'test':
+            case "test":
                 discord_bot.sendMessage({
                     to: channelID,
                     message: "test"
                 });
                 break;
+
             //more commands
-            case 'roll':
+            case "roll":
                 let regex = RegExp("\\d+d\\d+");
                 var roll = args[0].toLowerCase();
 
@@ -52,11 +53,35 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                 var rolls = parseInt(roll.substring(roll, dpos));
                 var sides = parseInt(args[0].substring(dpos, roll.length));
                 var result = helpers.roll(rolls, sides);
+
                 discord_bot.sendMessage({
                    to: channelID,
                    message: result 
                 });
                 break; 
+
+            case "hi":
+                discord_bot.uploadFile({
+                    to: channelID,
+                    file: "./resources/kaedeHey.png",
+                    message: "Hey!"
+                });
+                break;
+            
+            case "shrug":
+                discord_bot.sendMessage({
+                    to: channelID,
+                    message: "¯\\_(ツ)_/¯"
+                });
+                break;
+            //my friends wanted this one
+            case "bepsi":
+                var result = helpers.bepsi();
+                discord_bot.sendMessage({
+                    to: channelID,
+                    message: result
+                });
+                break;
         }
     }
 });

@@ -101,7 +101,10 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
             }
 
             case "tamamo": {
-                
+                discord_bot.uploadFile({
+                    to: channelID,
+                    file: "./resources/kagerouSmirk.png"
+                });
             }
         }
     }

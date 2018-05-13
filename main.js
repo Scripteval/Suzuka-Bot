@@ -1,7 +1,10 @@
-var Discord = require("discord.io");
-var logger  = require("winston");
-var auth    = require("./auth.json");
-var helpers = require("./src/helpers.js")
+let Discord = require("discord.io");
+let logger  = require("winston");
+let auth    = require("./auth.json");
+let helpers = require("./src/helpers.js")
+
+const DCHARLIMIT = 2000;
+
 
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -9,7 +12,7 @@ logger.add(logger.transports.Console, {
 });
 logger.level = "debug";
 
-var discord_bot = new Discord.Client({
+let discord_bot = new Discord.Client({
     token: auth.token,
     autorun: true
 });
@@ -23,22 +26,23 @@ discord_bot.on("ready", function(event) {
 discord_bot.on("message", function(user, userID, channelID, message, event) {
     //Look for commands starting with '!'
     if (message[0] == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
+        let args = message.substring(1).split(' ');
+        let cmd = args[0];
         args = args.splice(1);
         
         switch(cmd) {
-            case "test":
+            case "test": {
                 discord_bot.sendMessage({
                     to: channelID,
                     message: "test"
                 });
                 break;
+            }
 
             //more commands
-            case "roll":
+            case "roll": {
                 let regex = RegExp("\\d+d\\d+");
-                var roll = args[0].toLowerCase();
+                let roll = args[0].toLowerCase();
 
                 if (!regex.test(roll)) {
                     discord_bot.sendMessage({
@@ -49,39 +53,50 @@ discord_bot.on("message", function(user, userID, channelID, message, event) {
                     break;
                 }
 
-                var dpos = roll.search('d') + 1;
-                var rolls = parseInt(roll.substring(roll, dpos));
-                var sides = parseInt(args[0].substring(dpos, roll.length));
-                var result = helpers.roll(rolls, sides);
+                let dpos = roll.search('d') + 1;
+                let rolls = parseInt(roll.substring(roll, dpos));
+                let sides = parseInt(args[0].substring(dpos, roll.length));
+                let result = helpers.roll(rolls, sides);
 
+                if (result.length > DCHARLIMIT) {
+                    result = result.split(' ');
+                    result = "Character limit reached. Result was: " +
+                    result[result.length - 1];
+                }
+                
                 discord_bot.sendMessage({
                    to: channelID,
                    message: result 
                 });
                 break; 
+            }
 
-            case "hi":
+            case "hi": {
                 discord_bot.uploadFile({
                     to: channelID,
                     file: "./resources/kaedeHey.png",
                     message: "Hey!"
                 });
                 break;
+            }
             
-            case "shrug":
+            case "shrug": {
                 discord_bot.sendMessage({
                     to: channelID,
                     message: "¯\\_(ツ)_/¯"
                 });
                 break;
+            }
+                
             //my friends wanted this one
-            case "bepsi":
-                var result = helpers.bepsi();
+            case "bepsi": {
+                let result = helpers.bepsi();
                 discord_bot.sendMessage({
                     to: channelID,
                     message: result
                 });
                 break;
+            }
         }
     }
 });

@@ -4,6 +4,7 @@ module.exports = {
     roll: function(rolls, sides) {
         let result = `Rolling **${rolls}d${sides}**:`;
         let total  = 0;
+
         for (let i = 0; i < rolls; ++i) {
             if (i > 0) {
                 result = result + ' +';
@@ -12,7 +13,16 @@ module.exports = {
             result = result  + ' ' + number.toString();
             total += number;
         }
-        result = result + ": **" + total.toString() + "**";
+
+        if (rolls == 1) {
+            let index = result.match(": \\d").index + 2;
+            result = [result.slice(0, index), "**", result.slice(index), "**"]
+            .join('');
+            console.log(result);
+        } else {
+            result = result + ": **" + total.toString() + "**";
+        }
+
         return result; 
     },
 

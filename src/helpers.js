@@ -9,7 +9,7 @@ module.exports = {
             if (i > 0) {
                 result = result + ' +';
             }
-            let number = Math.floor(Math.random() * Math.floor(sides + 1)) + 1;
+            let number = Math.floor(Math.random() * sides) + 1;
             result = result  + ' ' + number.toString();
             total += number;
         }
@@ -19,7 +19,7 @@ module.exports = {
             result = [result.slice(0, index), "**", result.slice(index), "**"]
             .join('');
         } else {
-            result = result + ": **" + total.toString() + "**";
+            result = result + " = **" + total.toString() + "**";
         }
 
         return result; 
@@ -27,6 +27,6 @@ module.exports = {
 
     bepsi: function() {
         let dict = bepsi.dict;
-        return dict[Math.floor(Math.random() * dict.length) + 1];
+        return dict[Math.floor(Math.random() * dict.length)];
     }
 };

@@ -1,4 +1,4 @@
-let axios = require("axios");
+let axios            = require("axios");
 const eballresponses = require("../resources/8ball.json");
 module.exports = {
     roll: function(rolls, sides) {

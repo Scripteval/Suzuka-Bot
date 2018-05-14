@@ -51,6 +51,12 @@ discord_bot.on("message", message =>  {
                 let rolls = parseInt(roll.substring(roll, dpos));
                 let sides = parseInt(args[0].substring(dpos, roll.length));
 
+                if (rolls > 10 || rolls < 1) {
+                    message.channel.send("Please roll at least 1 or " +
+                    "at most 10 dice.");
+                    break;
+                }
+
                 let result = helpers.roll(rolls, sides);
 
                 if (result.length > DCHARLIMIT) {
@@ -71,7 +77,7 @@ discord_bot.on("message", message =>  {
             }
             
             case "shrug": {
-                message.channel.send( "¯\\_(ツ)_/¯");
+                message.channel.send("¯\\_(ツ)_/¯");
                 break;
             }
                 
@@ -92,9 +98,31 @@ discord_bot.on("message", message =>  {
             }
 
             case "8ball": {
-                result = helpers.eightball();
+                const result = helpers.eightball();
                 message.channel.send(result);
+                break;
             }
+
+            case "avatar": {
+                let result = ""; 
+                if (!args.length) {
+                    result = message.author.avatarURL;
+                } else if (message.mentions.users.first()) {
+                    result = message.mentions.users.first().avatarURL;
+                } else {
+                    result = "Usage: ``!avatar [@user]``.";
+                }
+                message.channel.send(result);
+                break;
+            }
+
+            case "jeff": {
+                message.channel.send({
+                    files: ["./resources/jeff.png"]
+                });
+                break;
+            }
+
         }
     }
 });

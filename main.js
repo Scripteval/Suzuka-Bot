@@ -48,12 +48,12 @@ discord_bot.on("message", message =>  {
                 let roll = args[0].toLowerCase();
                 
                 let dpos = roll.search('d') + 1;
-                let rolls = parseInt(roll.substring(roll, dpos));
+                let rolls = parseInt(roll.substring(0, dpos));
                 let sides = parseInt(args[0].substring(dpos, roll.length));
 
                 if (rolls > 10 || rolls < 1) {
                     message.channel.send("Please roll at least 1 or " +
-                    "at most 10 dice.");
+                        "at most 10 dice.");
                     break;
                 }
 
@@ -62,7 +62,7 @@ discord_bot.on("message", message =>  {
                 if (result.length > DCHARLIMIT) {
                     result = result.split(' ');
                     result = "Character limit reached. Result was: " +
-                    result[result.length - 1];
+                        result[result.length - 1];
                 }
                 
                 message.channel.send(result);
@@ -122,7 +122,6 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
-
         }
     }
 });

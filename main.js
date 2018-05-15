@@ -127,7 +127,9 @@ discord_bot.on("message", message =>  {
                 const argTags = args.join(' ');
                 const result = helpers.getDanbooruPost(argTags);
                 result.then(url => {
-                    message.channel.send(url);
+                    message.channel.send(url).catch(error => {
+                        message.channel.send("Search returned no results.");
+                    });
                 });
                 break;
             }

@@ -6,6 +6,7 @@
     "author": "Scripteval",
     "dependencies": {
         "axios": "^0.18.0",
+        "danbooru": "^3.0.7",
         "discord.js": "^11.3.2",
         "node-opus": "^0.3.0",
         "winston": "^2.4.2"

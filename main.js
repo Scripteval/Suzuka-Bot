@@ -1,7 +1,7 @@
 let Discord = require("discord.js");
 let logger  = require("winston");
 let auth    = require("./auth.json");
-let helpers = require("./src/helpers.js")
+let helpers = require("./src/helpers.js");
 
 const DCHARLIMIT = 2000;
 
@@ -119,6 +119,15 @@ discord_bot.on("message", message =>  {
             case "jeff": {
                 message.channel.send({
                     files: ["./resources/jeff.png"]
+                });
+                break;
+            }
+
+            case "danbooru": {
+                const argTags = args.join(' ');
+                const result = helpers.getDanbooruPost(argTags);
+                result.then(url => {
+                    message.channel.send(url);
                 });
                 break;
             }

@@ -30,7 +30,7 @@ module.exports = {
     bepsi: async function() {
         const url = "http://fictionalcompanies.wikia.com/api/v1/" +
             "Articles/Top?limit=200";
-        let result = ""
+        let result = "";
         try {
             const response = await axios.get(url);
             const data = response.data.items;
@@ -53,6 +53,21 @@ module.exports = {
             const response = await booru.posts({tags: tags});
             const post = response[Math.floor(Math.random() * response.length)];
             result = post.file_url;
+        } catch (error) {
+            result = error;
+        }
+        return result;
+    },
+
+    getBadMemes: async function() {
+        const url  = "https://www.reddit.com/r/dankmemes.json?limit=50";
+        let result = "";
+
+        try {
+            const response = await axios.get(url);
+            const data = response.data.data.children;
+            const post = data[Math.floor(Math.random() * data.length)];
+            result = post.data.url;
         } catch (error) {
             result = error;
         }

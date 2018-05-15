@@ -133,6 +133,16 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
+
+            case "badmeme": {
+                const result = helpers.getBadMemes();
+                result.then(url => {
+                    message.channel.send(url).catch(error => {
+                        message.channel.send("Search returned no results.");
+                    });
+                });
+                break;
+            }
         }
     }
 });

@@ -154,6 +154,24 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
+
+            case "birthday": {
+                let result = "";
+                const url = "http://itsyourbirthday.today/#";
+                if (!args.length) {
+                    const user = message.author;
+                    result = "Happy birthday <@" + user.id + ">!\n";
+                    result = result + url + user.username;
+                } else if (message.mentions.users.first()) {
+                    const user = message.mentions.users.first();
+                    result = "Happy birthday <@" + user.id + ">!\n";
+                    result = result + url + user.username;
+                } else {
+                    result = "Usage: ``!birthday [@user]``.";
+                }
+                message.channel.send(result);
+                break;
+            }
         }
     }
 });

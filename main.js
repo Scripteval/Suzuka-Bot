@@ -158,4 +158,8 @@ discord_bot.on("message", message =>  {
     }
 });
 
+discord_bot.on("error", error => {
+    logger.info(error);
+});
+
 discord_bot.login(auth.token);

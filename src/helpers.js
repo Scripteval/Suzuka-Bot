@@ -60,13 +60,20 @@ module.exports = {
     },
 
     getBadMemes: async function() {
-        const url  = "https://www.reddit.com/r/dankmemes.json?limit=50";
+        const url  = "https://www.reddit.com/r/dankmemes.json?limit=75";
         let result = "";
 
         try {
+            const regex    = RegExp("/(/comments/)/");
             const response = await axios.get(url);
-            const data = response.data.data.children;
-            const post = data[Math.floor(Math.random() * data.length)];
+            const data     = response.data.data.children;
+            let post = "";
+            while (post == "") {
+                let temp = data[Math.floor(Math.random() * data.length)];
+                if (!regex.test(temp.data.url)) {
+                    post = temp;
+                }
+            }
             result = post.data.url;
         } catch (error) {
             result = error;

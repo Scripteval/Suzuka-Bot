@@ -143,6 +143,17 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
+
+            case "pat": {
+                const argTags = "petting rating:safe";
+                const result = helpers.getDanbooruPost(argTags);
+                result.then(url => {
+                    message.channel.send("There there, I will pat you.\n" + url).catch(error => {
+                        message.channel.send("Search returned no results.");
+                    });
+                });
+                break;
+            }
         }
     }
 });

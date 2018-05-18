@@ -1,6 +1,8 @@
 let axios            = require("axios");
-const eballresponses = require("../resources/8ball.json");
 let Danbooru         = require("danbooru");
+const eballresponses = require("../resources/8ball.json");
+const bmresponses    = require("../resources/badmemes.json");
+
 
 module.exports = {
     roll: function(rolls, sides) {
@@ -28,7 +30,7 @@ module.exports = {
     },
 
     bepsi: async function() {
-        const url = "http://fictionalcompanies.wikia.com/api/v1/" +
+        const url  = "http://fictionalcompanies.wikia.com/api/v1/" +
             "Articles/Top?limit=200";
         let result = "";
         try {
@@ -48,7 +50,7 @@ module.exports = {
 
     getDanbooruPost: async function(tags) {
         const booru = new Danbooru();
-        let result = "";
+        let result  = "";
         try {
             const response = await booru.posts({tags: tags});
             const post = response[Math.floor(Math.random() * response.length)];
@@ -60,14 +62,15 @@ module.exports = {
     },
 
     getBadMemes: async function() {
-        const url  = "https://www.reddit.com/r/dankmemes.json?limit=75";
+        const dict = bmresponses.dict;
+        const url  = dict[Math.floor(Math.random() * dict.length)];
         let result = "";
 
         try {
             const regex    = RegExp("/(/comments/)/");
             const response = await axios.get(url);
             const data     = response.data.data.children;
-            let post = "";
+            let post       = "";
             while (post == "") {
                 let temp = data[Math.floor(Math.random() * data.length)];
                 if (!regex.test(temp.data.url)) {

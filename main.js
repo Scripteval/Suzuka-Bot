@@ -146,9 +146,10 @@ discord_bot.on("message", message =>  {
 
             case "pat": {
                 const argTags = "petting rating:safe";
+                const msg     = "There there, I will pat you.\n";
                 const result = helpers.getDanbooruPost(argTags);
                 result.then(url => {
-                    message.channel.send("There there, I will pat you.\n" + url).catch(error => {
+                    message.channel.send(msg + url).catch(error => {
                         message.channel.send("Search returned no results.");
                     });
                 });

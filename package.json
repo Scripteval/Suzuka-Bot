@@ -10,5 +10,20 @@
         "discord.js": "^11.3.2",
         "node-opus": "^0.3.0",
         "winston": "^2.4.2"
-    }
+    },
+    "engines": {
+        "node": "10.x",
+        "npm": "*"
+    },
+    "scripts": {
+        "start": "node main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Scripteval/Suzuka-Bot.git"
+    },
+    "bugs": {
+        "url" : "https://github.com/Scripteval/Suzuka-Bot/issues"
+    },
+    "homepage": "https://github.com/Scripteval/Suzuka-Bot$readme"
 }

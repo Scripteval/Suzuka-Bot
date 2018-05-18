@@ -17,6 +17,10 @@ discord_bot.on("ready", () => {
     logger.info("Connection Established");
     logger.info("Running as: ");
     logger.info(discord_bot.user.tag);
+    discord_bot.user.setPresence({
+        game: {name: "R&C: Going Commando"},
+        status: 'online'
+    });
 });
 
 discord_bot.on("message", message =>  {

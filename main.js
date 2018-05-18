@@ -182,4 +182,4 @@ discord_bot.on("error", error => {
     console.log(error);
 });
 
-discord_bot.login(auth.token);
+discord_bot.login(process.env.BOT_KEY);

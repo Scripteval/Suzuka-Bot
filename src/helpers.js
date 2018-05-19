@@ -67,7 +67,7 @@ module.exports = {
         let result = "";
 
         try {
-            const regex    = RegExp("/(/comments/)/");
+            const regex    = RegExp("(/comments/)");
             const response = await axios.get(url);
             const data     = response.data.data.children;
             let post       = "";

@@ -61,9 +61,14 @@ module.exports = {
         return result;
     },
 
-    getBadMemes: async function() {
+    getBadMemes: async function(wholesome) {
         const dict = bmresponses.dict;
-        const url  = dict[Math.floor(Math.random() * dict.length)];
+        let url    = "";
+        if (wholesome) {
+            url = dict[2];
+        } else {
+            url  = dict[Math.floor(Math.random() * dict.length)];
+        }
         let result = "";
 
         try {

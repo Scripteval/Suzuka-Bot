@@ -132,6 +132,7 @@ discord_bot.on("message", message =>  {
                 const result = helpers.getDanbooruPost(argTags, false);
                 result.then(url => {
                     message.channel.send(url).catch(error => {
+                        console.log(error);
                         message.channel.send("Search returned no results.");
                     });
                 });
@@ -171,6 +172,7 @@ discord_bot.on("message", message =>  {
                 const result = helpers.getDanbooruPost(argTags, true);
                 result.then(url => {
                     message.channel.send(msg + url).catch(error => {
+                        console.log(error);
                         message.channel.send("Search returned no results.");
                     });
                 });

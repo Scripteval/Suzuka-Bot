@@ -147,7 +147,7 @@ discord_bot.on("message", message =>  {
                 } else if (cmd == "ancap") {
                     type == "ancap";
                 }
-                const result = helpers.getBadMemes(type);
+                const result = helpers.getMemes(type);
                 result.then(url => {
                     message.channel.send(url).catch(error => {
                         message.channel.send("Search returned no results.");

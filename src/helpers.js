@@ -49,8 +49,9 @@ module.exports = {
     },
 
     getDanbooruPost: async function(tags, safe) {
-        const booru = safe ? new Danbooru("http://safebooru.donmai.us/")
-            : new Danbooru();
+        const booru = (safe ? 
+            new Danbooru({base: "http://safebooru.donmai.us/"})
+            : new Danbooru());
         let result  = "";
         try {
             const response = await booru.posts({tags: tags});

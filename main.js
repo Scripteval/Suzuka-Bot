@@ -158,7 +158,7 @@ discord_bot.on("message", message =>  {
 
             case "pat": {
                 const argTags = "petting hand_on_another's_head";
-                const msg     = "There there, I will pat you, ";
+                let msg     = "There there, I will pat you, ";
                 if (!args.length) {
                     const user = message.author;
                     msg = msg + "<@" + user.id + ">.\n";
@@ -166,7 +166,7 @@ discord_bot.on("message", message =>  {
                     const user = message.mentions.users.first();
                     msg = msg + "<@" + user.id + ">.\n";
                 } else {
-                    result = "Usage: ``!birthday [@user]``.";
+                    result = "Usage: ``!pat [@user]``.";
                 }
                 const result = helpers.getDanbooruPost(argTags, true);
                 result.then(url => {

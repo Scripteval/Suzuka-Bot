@@ -50,7 +50,7 @@ module.exports = {
 
     getDanbooruPost: async function(tags, safe) {
         const booru = (safe ? 
-            new Danbooru({base: "http://safebooru.donmai.us/"})
+            new Danbooru("https://safebooru.donmai.us/")
             : new Danbooru());
         let result  = "";
         try {

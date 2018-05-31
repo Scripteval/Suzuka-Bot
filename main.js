@@ -143,9 +143,9 @@ discord_bot.on("message", message =>  {
             case "badmeme": {
                 let type = "";
                 if (cmd == "wholesomememe") {
-                    type == "wholesome";
+                    type = "wholesome";
                 } else if (cmd == "ancap") {
-                    type == "ancap";
+                    type = "ancap";
                 }
                 const result = helpers.getMemes(type);
                 result.then(url => {

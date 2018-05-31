@@ -138,13 +138,16 @@ discord_bot.on("message", message =>  {
                 break;
             }
 
+            case "ancap":
             case "wholesomememe":
             case "badmeme": {
-                let wholesome = false;
+                let type = "";
                 if (cmd == "wholesomememe") {
-                    wholesome = true;
+                    type == "wholesome";
+                } else if (cmd == "ancap") {
+                    type == "ancap";
                 }
-                const result = helpers.getBadMemes(wholesome);
+                const result = helpers.getBadMemes(type);
                 result.then(url => {
                     message.channel.send(url).catch(error => {
                         message.channel.send("Search returned no results.");

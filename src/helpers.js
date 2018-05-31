@@ -1,7 +1,7 @@
 let axios            = require("axios");
 let Danbooru         = require("danbooru");
 const eballresponses = require("../resources/8ball.json");
-const bmresponses    = require("../resources/badmemes.json");
+const memes    = require("../resources/memes.json");
 
 
 module.exports = {
@@ -61,15 +61,19 @@ module.exports = {
         return result;
     },
 
-    getBadMemes: async function(wholesome) {
-        const dict = bmresponses.dict;
+    getMemes: async function(type) {
+        let dict = [];
         let url    = "";
-        if (wholesome) {
-            url = dict[2];
-        } else {
-            url  = dict[Math.floor(Math.random() * dict.length)];
-        }
         let result = "";
+        
+        if (type == "wholesome") {
+            dict = memes.wholesome;
+        } else if (type == "ancap") {
+            dict = memes.ancap;
+        } else {
+            dict = memes.bad;
+        }
+        url  = dict[Math.floor(Math.random() * dict.length)];
 
         try {
             const regex    = RegExp("(/comments/)");

@@ -1,7 +1,15 @@
 {
-    "dict": [
+    "bad": [
         "https://www.reddit.com/r/dankmemes.json?limit=75",
         "https://www.reddit.com/r/memeeconomy.json?limit=75",
+        "https://www.reddit.com/r/memes.json?limit=75"
+    ],
+
+    "wholesome": [
         "https://www.reddit.com/r/wholesomememes.json?limit=75"
+    ],
+
+    "ancap": [
+        "https://www.reddit.com/r/AnCapMeme.json?limit=75"
     ]
 }

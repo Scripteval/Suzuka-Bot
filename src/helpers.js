@@ -48,8 +48,9 @@ module.exports = {
         return dict[Math.floor(Math.random() * dict.length)];
     },
 
-    getDanbooruPost: async function(tags) {
-        const booru = new Danbooru();
+    getDanbooruPost: async function(tags, safe) {
+        const booru = safe ? new Danbooru("http://safebooru.donmai.us/")
+            : new Danbooru();
         let result  = "";
         try {
             const response = await booru.posts({tags: tags});

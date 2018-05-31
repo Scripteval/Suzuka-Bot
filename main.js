@@ -129,7 +129,7 @@ discord_bot.on("message", message =>  {
 
             case "danbooru": {
                 const argTags = args.join(' ');
-                const result = helpers.getDanbooruPost(argTags);
+                const result = helpers.getDanbooruPost(argTags, false);
                 result.then(url => {
                     message.channel.send(url).catch(error => {
                         message.channel.send("Search returned no results.");
@@ -157,9 +157,18 @@ discord_bot.on("message", message =>  {
             }
 
             case "pat": {
-                const argTags = "petting rating:safe";
-                const msg     = "There there, I will pat you.\n";
-                const result = helpers.getDanbooruPost(argTags);
+                const argTags = "petting hand_on_another's_head";
+                const msg     = "There there, I will pat you, ";
+                if (!args.length) {
+                    const user = message.author;
+                    msg = msg + "<@" + user.id + ">.\n";
+                } else if (message.mentions.users.first()) {
+                    const user = message.mentions.users.first();
+                    msg = msg + "<@" + user.id + ">.\n";
+                } else {
+                    result = "Usage: ``!birthday [@user]``.";
+                }
+                const result = helpers.getDanbooruPost(argTags, true);
                 result.then(url => {
                     message.channel.send(msg + url).catch(error => {
                         message.channel.send("Search returned no results.");

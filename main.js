@@ -129,7 +129,7 @@ discord_bot.on("message", message =>  {
             
             case "safebooru":
             case "danbooru": {
-                let safe = (cmd == safebooru);
+                let safe = (cmd == "safebooru");
                 const argTags = args.join(' ');
                 const result = helpers.getDanbooruPost(argTags, safe);
                 result.then(url => {

@@ -126,10 +126,12 @@ discord_bot.on("message", message =>  {
                 });
                 break;
             }
-
+            
+            case "safebooru":
             case "danbooru": {
+                let safe = (cmd == safebooru);
                 const argTags = args.join(' ');
-                const result = helpers.getDanbooruPost(argTags, false);
+                const result = helpers.getDanbooruPost(argTags, safe);
                 result.then(url => {
                     message.channel.send(url).catch(error => {
                         console.log(error);
@@ -167,7 +169,7 @@ discord_bot.on("message", message =>  {
                     const user = message.mentions.users.first();
                     msg = msg + "<@" + user.id + ">.\n";
                 } else {
-                    result = "Usage: ``!pat [@user]``.";
+                    msg = "Usage: ``!pat [@user]``.";
                 }
                 const result = helpers.getDanbooruPost(argTags, true);
                 result.then(url => {

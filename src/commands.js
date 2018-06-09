@@ -55,7 +55,7 @@ module.exports = {
 
                 case "hi": {
                     message.channel.send("Hey!", {
-                        files: ["../resources/kaedeHey.png"]
+                        files: ["./resources/kaedeHey.png"]
                     });
                     break;
                 }
@@ -76,7 +76,7 @@ module.exports = {
 
                 case "tamamo": {
                     message.channel.send({
-                        files: ["../resources/kagerouSmirk.png"]
+                        files: ["./resources/kagerouSmirk.png"]
                     });
                     break;
                 }

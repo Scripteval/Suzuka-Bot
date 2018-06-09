@@ -3,7 +3,7 @@ let helpers = require("./helpers.js");
 const DCHARLIMIT = 2000;
 
 module.exports = {
-    handleCommand: function(message) {
+    handleCommand: function(message, logger) {
         //Look for commands starting with '!'
         let content = message.content;
         if (content[0] == '!') {
@@ -102,7 +102,7 @@ module.exports = {
 
                 case "jeff": {
                     message.channel.send({
-                        files: ["../resources/jeff.png"]
+                        files: ["./resources/jeff.png"]
                     });
                     break;
                 }

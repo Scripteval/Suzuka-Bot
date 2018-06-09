@@ -1,7 +1,7 @@
 let Discord  = require("discord.js");
 let logger   = require("winston");
 let auth     = require("./auth.json");
-let commands = reqire("./src/commands.js");
+let commands = require("./src/commands.js");
 const DCHARLIMIT = 2000;
 
 logger.remove(logger.transports.Console);

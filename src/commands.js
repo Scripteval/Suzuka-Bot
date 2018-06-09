@@ -1,4 +1,6 @@
-let helpers = require("helpers.js");
+let helpers = require("./helpers.js");
+
+const DCHARLIMIT = 2000;
 
 module.exports = {
     handleCommand: function(message) {

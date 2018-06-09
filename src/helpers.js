@@ -65,7 +65,7 @@ module.exports = {
                     response[Math.floor(Math.random() * response.length)];
                 result = post.file_url;
                 attempts.add(result)
-            } while (arrayContains(lastUrls, result) || 
+            } while (arrayContains(lastUrls, result) && 
                 (response.length != attempts.size));
         } catch (error) {
             result = error;
@@ -103,7 +103,7 @@ module.exports = {
                     }
                     attempts.add(temp);
                 }
-            } while (arrayContains(lastUrls, post.data.url) || 
+            } while (arrayContains(lastUrls, post.data.url) && 
                 (data.length != attempts.size));
             result = post.data.url;
         } catch (error) {

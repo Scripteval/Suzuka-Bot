@@ -22,7 +22,7 @@ discord_bot.on("ready", () => {
 });
 
 discord_bot.on("message", message =>  {
-    commands.handleCommand(message);
+    commands.handleCommand(message, logger);
 });
 
 discord_bot.on("error", error => {

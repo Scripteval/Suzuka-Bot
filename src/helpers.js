@@ -59,14 +59,13 @@ module.exports = {
         let result  = "";
         try {
             const response = await booru.posts({tags: tags});
-            let attempts   = new Set();
             do {
-                const post = 
-                    response[Math.floor(Math.random() * response.length)];
+                const index = Math.floor(Math.random() * response.length);
+                const post = response[index];
                 result = post.file_url;
-                attempts.add(result)
+                response.splice(index, 1);
             } while (arrayContains(lastUrls, result) && 
-                (response.length != attempts.size));
+                (response.length != 0));
         } catch (error) {
             result = error;
         }
@@ -94,17 +93,17 @@ module.exports = {
             const data     = response.data.data.children;
 
             let post       = "";
-            let attempts   = new Set();
             do {
                 while (post == "") {
-                    let temp = data[Math.floor(Math.random() * data.length)];
+                    const index = Math.floor(Math.random() * data.length);
+                    let temp = data[index];
                     if (!regex.test(temp.data.url)) {
                         post = temp;
                     }
-                    attempts.add(temp);
+                    data.splice(index, 1);
                 }
             } while (arrayContains(lastUrls, post.data.url) && 
-                (data.length != attempts.size));
+                (data.length != 0));
             result = post.data.url;
         } catch (error) {
             result = error;

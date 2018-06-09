@@ -1,7 +1,7 @@
 let axios            = require("axios");
 let Danbooru         = require("danbooru");
+const memes          = require("../resources/memes.json");
 const eballresponses = require("../resources/8ball.json");
-const memes    = require("../resources/memes.json");
 
 
 module.exports = {

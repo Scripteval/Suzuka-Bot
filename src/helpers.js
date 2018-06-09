@@ -3,6 +3,10 @@ let Danbooru         = require("danbooru");
 const memes          = require("../resources/memes.json");
 const eballresponses = require("../resources/8ball.json");
 
+const URLARRAYLIMIT = 5;
+
+let lastUrls = new Array(URLARRAYLIMIT);
+let pointer  = 0;
 
 module.exports = {
     roll: function(rolls, sides) {
@@ -55,11 +59,18 @@ module.exports = {
         let result  = "";
         try {
             const response = await booru.posts({tags: tags});
-            const post = response[Math.floor(Math.random() * response.length)];
-            result = post.file_url;
+            let attempts   = new Set();
+            do {
+                const post = 
+                    response[Math.floor(Math.random() * response.length)];
+                result = post.file_url;
+                attempts.add(result)
+            } while (arrayContains(lastUrls, result) || 
+                (response.length != attempts.size));
         } catch (error) {
             result = error;
         }
+        updateUrlArray(result);
         return result;
     },
 
@@ -75,23 +86,39 @@ module.exports = {
         } else {
             dict = memes.bad;
         }
-        url  = dict[Math.floor(Math.random() * dict.length)];
-
         try {
+            url = dict[Math.floor(Math.random() * dict.length)];
+
             const regex    = RegExp("(/comments/)");
             const response = await axios.get(url);
             const data     = response.data.data.children;
+
             let post       = "";
-            while (post == "") {
-                let temp = data[Math.floor(Math.random() * data.length)];
-                if (!regex.test(temp.data.url)) {
-                    post = temp;
+            let attempts   = new Set();
+            do {
+                while (post == "") {
+                    let temp = data[Math.floor(Math.random() * data.length)];
+                    if (!regex.test(temp.data.url)) {
+                        post = temp;
+                    }
+                    attempts.add(temp);
                 }
-            }
+            } while (arrayContains(lastUrls, post.data.url) || 
+                (data.length != attempts.size));
             result = post.data.url;
         } catch (error) {
             result = error;
         }
+        updateUrlArray(result);
         return result;
     }
+};
+
+const arrayContains = function(array, item) {
+    return (array.indexOf(item) > -1);  
+};
+
+const updateUrlArray = function(url) {
+    lastUrls[pointer] = url;
+    pointer = (pointer == URLARRAYLIMIT - 1) ? 0 : pointer + 1;
 };

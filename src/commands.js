@@ -133,6 +133,7 @@ module.exports = {
                     const result = helpers.getMemes(type);
                     result.then(url => {
                         message.channel.send(url).catch(error => {
+                            console.log(error);
                             message.channel.send("Search returned no results.");
                         });
                     });

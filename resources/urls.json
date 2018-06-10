@@ -17,8 +17,8 @@
         "https://www.reddit.com/r/dogpictures.json?limit=75",
         "https://www.reddit.com/r/puppies.json?limit=75",
         "https://www.reddit.com/r/blop.json?limit=75",
-        "https://www.reddit.com/r/lookatmydog?limit=75",
-        "https://www.reddit.com/r/dogswithjobs?limit=75"
+        "https://www.reddit.com/r/lookatmydog.json?limit=75",
+        "https://www.reddit.com/r/dogswithjobs.json?limit=75"
     ],
 
     "cat": [

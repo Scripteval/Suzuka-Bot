@@ -226,10 +226,6 @@ module.exports = {
                     message.channel.send(result);
                     break;
                 }
-
-                case "dog": {
-
-                }
             }
         }
     }

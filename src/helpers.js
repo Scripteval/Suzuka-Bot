@@ -1,6 +1,6 @@
 let axios            = require("axios");
 let Danbooru         = require("danbooru");
-const memes          = require("../resources/memes.json");
+const urls           = require("../resources/urls.json");
 const eballresponses = require("../resources/8ball.json");
 
 const URLARRAYLIMIT = 5;
@@ -73,21 +73,8 @@ module.exports = {
         return result;
     },
 
-    getMemes: async function(type) {
-        let dict = [];
-        let url    = "";
-        let result = "";
-        
-        if (type == "wholesome") {
-            dict = memes.wholesome;
-        } else if (type == "ancap") {
-            dict = memes.ancap;
-        } else {
-            dict = memes.bad;
-        }
+    getRedditPics: async function(url) {
         try {
-            url = dict[Math.floor(Math.random() * dict.length)];
-
             const regex    = RegExp("(/comments/)");
             const response = await axios.get(url);
             const data     = response.data.data.children;
@@ -110,6 +97,44 @@ module.exports = {
         }
         updateUrlArray(result);
         return result;
+    },
+
+    getBadMemes: async function() {
+        let dict = urls.bad;
+        let url  = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);
+    },
+
+    getWholesomeMemes: async function() {
+        let dict = urls.wholesome;
+        let url  = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);
+    },
+
+    getAncapMemes: async function() {
+        let dict = urls.ancap;
+        let url  = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);
+    },
+
+    getDogPics: async function() {
+        let dict = urls.dog;
+        let url  = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);
+    },
+
+    getCatPics: async function() {
+        let dict = urls.cat;
+        let url  = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);
+    },
+
+    getAwwPics: async function() {
+        let result = null;
+        let dict   = urls.aww;
+        dict.concat(urls.dog, urls.cat);
+        let url    = dict[Math.floor(Math.random() * dict.length)];
+        return this.getRedditPics(url);    
     }
 };
 

@@ -1,0 +1,38 @@
+{
+    "bad": [
+        "https://www.reddit.com/r/dankmemes.json?limit=75",
+        "https://www.reddit.com/r/memeeconomy.json?limit=75",
+        "https://www.reddit.com/r/memes.json?limit=75"
+    ],
+
+    "wholesome": [
+        "https://www.reddit.com/r/wholesomememes.json?limit=75"
+    ],
+
+    "ancap": [
+        "https://www.reddit.com/r/AnCapMeme.json?limit=75"
+    ],
+
+    "dog": [
+        "https://www.reddit.com/r/dogpictures.json?limit=75",
+        "https://www.reddit.com/r/puppies.json?limit=75",
+        "https://www.reddit.com/r/blop.json?limit=75",
+        "https://www.reddit.com/r/lookatmydog?limit=75",
+        "https://www.reddit.com/r/dogswithjobs?limit=75"
+    ],
+
+    "cat": [
+        "https://www.reddit.com/r/catpictures.json?limit=75",
+        "https://www.reddit.com/r/kittens.json?limit=75",
+        "https://www.reddit.com/r/CatTaps.json?limit=75",
+        "https://www.reddit.com/r/Catswithjobs.json?limit=75",
+        "https://www.reddit.com/r/Blep.json?limit=75"
+
+    ],
+
+    "aww": [
+        "https://www.reddit.com/r/aww.json?limit=75",
+        "https://www.reddit.com/r/AnimalsBeingDerps.json?limit=75",
+        "https://www.reddit.com/r/awwgifs.json?limit=75"
+    ]
+}

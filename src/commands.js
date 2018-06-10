@@ -121,16 +121,63 @@ module.exports = {
                     break;
                 }
 
-                case "ancap":
-                case "wholesomememe":
+                case "ancap": {
+                    const result = helpers.getAncapMemes();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
+
+                case "wholesomememe": {
+                    const result = helpers.getWholesomeMemes();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
+
                 case "badmeme": {
-                    let type = "";
-                    if (cmd == "wholesomememe") {
-                        type = "wholesome";
-                    } else if (cmd == "ancap") {
-                        type = "ancap";
-                    }
-                    const result = helpers.getMemes(type);
+                    const result = helpers.getBadMemes();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
+
+                case "aww": {
+                    const result = helpers.getAwwPics();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
+
+                case "dog": {
+                    const result = helpers.getDogPics();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
+
+                case "cat": {
+                    const result = helpers.getCatPics();
                     result.then(url => {
                         message.channel.send(url).catch(error => {
                             console.log(error);
@@ -178,6 +225,10 @@ module.exports = {
                     }
                     message.channel.send(result);
                     break;
+                }
+
+                case "dog": {
+
                 }
             }
         }

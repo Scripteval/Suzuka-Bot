@@ -5,7 +5,7 @@
     "main": "main.js",
     "author": "Scripteval",
     "dependencies": {
-        "axios": "^0.18.0",
+        "axios": "^0.18.1",
         "danbooru": "^3.0.7",
         "discord.js": "^11.3.2",
         "node-opus": "^0.3.0",

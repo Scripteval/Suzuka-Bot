@@ -226,6 +226,17 @@ module.exports = {
                     message.channel.send(result);
                     break;
                 }
+
+                case "beans": {
+                    const result = helpers.getBeans();
+                    result.then(url => {
+                        message.channel.send(url).catch(error => {
+                            console.log(error);
+                            message.channel.send("Search returned no results.");
+                        });
+                    });
+                    break;
+                }
             }
         }
     }

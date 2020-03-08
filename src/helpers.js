@@ -135,6 +135,13 @@ module.exports = {
         dict.concat(urls.dog, urls.cat);
         let url    = dict[Math.floor(Math.random() * dict.length)];
         return this.getRedditPics(url);    
+    },
+
+    getBeans: async function() {
+        let result = null;
+        let dict   = urls.beans;
+        let url    = dict[0];
+        return this.getRedditPics(url);
     }
 };
 
